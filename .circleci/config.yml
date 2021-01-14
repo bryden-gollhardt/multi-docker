@@ -50,13 +50,14 @@ workflows:
   elastic-beanstalk-workflow:
     jobs:
       - buildAndTest
-      - aws-elastic-beanstalk/deploy:
-          context: aws-creds
-          environment-name: docker-react-2
-          label: version-<<pipeline.number>>
-          filters:
-            branches:
-              only:
-                - master
-          requires:
-            - buildAndTest
+      - buildProdImages
+      # - aws-elastic-beanstalk/deploy:
+      #     context: aws-creds
+      #     environment-name: docker-react-2
+      #     label: version-<<pipeline.number>>
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      #     requires:
+      #       - buildAndTest
