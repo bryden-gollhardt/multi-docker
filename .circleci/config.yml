@@ -3,7 +3,6 @@ version: 2.1
 # Use a package of configuration called an orb.
 orbs:
   aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@1.0.0
-  node: circleci/node@4.1.0
 jobs:
   buildAndTest:
     docker:
@@ -32,7 +31,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
-      # build and push Docker image
+      # build and push Docker images
       - run: |
           TAG=latest
           docker build -t jethred/multi-client:$TAG ./client
@@ -51,13 +50,14 @@ workflows:
     jobs:
       - buildAndTest
       - buildProdImages
-      # - aws-elastic-beanstalk/deploy:
-      #     context: aws-creds
-      #     environment-name: docker-react-2
-      #     label: version-<<pipeline.number>>
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
-      #     requires:
-      #       - buildAndTest
+      - aws-elastic-beanstalk/deploy:
+          context: aws-creds_multi-docker
+          environment-name: multi-docker
+          label: version-<<pipeline.number>>
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - buildProdImages
+            - buildAndTest
