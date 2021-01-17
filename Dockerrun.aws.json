@@ -6,7 +6,12 @@
             "image": "jethred/multi-client",
             "hostname": "client",
             "essential": false,
-            "memory": 128
+            "memory": 128,
+            "command": [
+                "tail",
+                "-f",
+                "/bin/bash"
+              ]
         },
         {
             "name": "server",
@@ -33,7 +38,12 @@
                 }
             ],
             "links": ["client", "server"],
-            "memory": 128
+            "memory": 128,
+            "command": [
+                "tail",
+                "-f",
+                "/bin/bash"
+              ]
         }
     ]
 }
