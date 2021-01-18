@@ -18,9 +18,7 @@ services:
   nginx:
     image: "jethred/multi-nginx"
     mem_limit: 128m
-    ports: 
-      - "8080:80"
+    ports:
+      - '8080:8080'
     restart: unless-stopped
-  
-
     
