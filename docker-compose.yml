@@ -10,16 +10,17 @@ services:
     image: "jethred/multi-server"
     mem_limit: 128m
     restart: unless-stopped
-    
+
   worker:
     image: "jethred/multi-worker"
     mem_limit: 128m
 
   nginx:
     image: "jethred/multi-nginx"
-    restart: unless-stopped
+    mem_limit: 128m
     ports: 
-      - "80:80"
+      - "8080:80"
+    restart: unless-stopped
   
 
     
