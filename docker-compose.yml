@@ -4,6 +4,9 @@ services:
   client:
     image: "jethred/multi-client"
     mem_limit: 128m
+    command: ["bash", "-c", "/etc/init.d/nginx start || echo 'nginx started with errors'"]
+    depends_on:
+      - api
 
   api:
     image: "jethred/multi-server"
@@ -16,9 +19,14 @@ services:
   nginx:
     image: "jethred/multi-nginx"
     mem_limit: 128m
+    restart: always
     ports:
       - '80:80'
     links:
       - client
       - api
+    command: ["bash", "-c", "/etc/init.d/nginx start || echo 'nginx started with errors'"]
+    depends_on:
+      - api
+      - client
     
