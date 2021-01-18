@@ -5,16 +5,12 @@ services:
     image: "jethred/multi-client"
     mem_limit: 128m
     restart: unless-stopped
-    networks:
-      - vnet
 
   api:
     image: "jethred/multi-server"
     mem_limit: 128m
     restart: unless-stopped
-    networks: 
-      - vnet
-
+    
   worker:
     image: "jethred/multi-worker"
     mem_limit: 128m
@@ -24,13 +20,6 @@ services:
     restart: unless-stopped
     ports: 
       - "80:80"
-    networks:
-      - vnet
-
-networks:
-  vnet:    
-
-
   
 
     
