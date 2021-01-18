@@ -3,6 +3,8 @@ version: "2.4"
 services:
   client:
     hostname: client
+    expose:
+      - "3000"
     image: "jethred/multi-client"
     mem_limit: 128m
     command: ["bash", "-c", "/etc/init.d/nginx start || echo 'nginx started with errors'"]
@@ -14,6 +16,7 @@ services:
 
   api:
     hostname: api
+    expose:
     image: "jethred/multi-server"
     mem_limit: 128m
     networks:
