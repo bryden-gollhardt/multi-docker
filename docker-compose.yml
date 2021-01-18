@@ -7,10 +7,15 @@ services:
     command: ["bash", "-c", "/etc/init.d/nginx start || echo 'nginx started with errors'"]
     depends_on:
       - api
+    restart: always
+    networks:
+      - vnet
 
   api:
     image: "jethred/multi-server"
     mem_limit: 128m
+    networks:
+      - vnet
 
   worker:
     image: "jethred/multi-worker"
@@ -22,11 +27,13 @@ services:
     restart: always
     ports:
       - '80:80'
-    links:
-      - client
-      - api
     command: ["bash", "-c", "/etc/init.d/nginx start || echo 'nginx started with errors'"]
     depends_on:
       - api
       - client
+    networks:
+      - vnet
+
+networks:
+  vnet:
     
