@@ -6,7 +6,11 @@
             "image": "jethred/multi-client",
             "hostname": "client",
             "essential": false,
-            "memory": 128
+            "memory": 128,
+            "command": [
+                "/etc/init.d/nginx",
+                "reload"
+            ]
         },
         {
             "name": "server",
@@ -33,7 +37,11 @@
                 }
             ],
             "links": ["client", "server"],
-            "memory": 128
+            "memory": 128,
+            "command": [
+                "/etc/init.d/nginx",
+                "reload"
+            ]
         }
     ]
 }
