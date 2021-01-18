@@ -15,7 +15,6 @@ services:
 
   api:
     hostname: api
-    expose:
     image: "jethred/multi-server"
     mem_limit: 128m
     networks:
